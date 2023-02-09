@@ -27,3 +27,6 @@ btn1.addEventListener("click", function() {
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
     tgWA.sendData(item);
 });
+
+console.log("init");
+console.log(tgWA);
