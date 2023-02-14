@@ -12,7 +12,7 @@ tgWA.MainButton.color = "#00FF00";
 
 let item = "";
 
-let btn1 = document.getElementById("button1");
+/*let btn1 = document.getElementById("button1");
 
 btn1.addEventListener("click", function() {
     if (tgWA.MainButton.isVisible) {
@@ -22,7 +22,7 @@ btn1.addEventListener("click", function() {
         item = "1";
         tgWA.MainButton.show();
     }
-});
+});*/
 
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
     tgWA.sendData(item);
