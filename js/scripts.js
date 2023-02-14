@@ -88,6 +88,7 @@ console.log(tgWA);
         video.play();
       })
       .catch((err) => {
+        document.getElementById("logs").innerHTML = err;
         console.error(`An error occurred: ${err}`);
       });
 
