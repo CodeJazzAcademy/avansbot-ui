@@ -77,7 +77,12 @@ console.log(tgWA);
     startbutton = document.getElementById("startbutton");
 
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: false })
+      .getUserMedia({
+        audio: false,
+        video: {
+            facingMode: 'environment'
+        }
+      })
       .then((stream) => {
         video.srcObject = stream;
         video.play();
