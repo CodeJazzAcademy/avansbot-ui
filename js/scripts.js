@@ -1,7 +1,7 @@
 // camera stream video element
-  let on_stream_video = document.querySelector('#camera-stream');
+  let on_stream_video = document.getElementById('camera-stream');
   // flip button element
-  let flipBtn = document.querySelector('#flip-btn');
+  let flipBtn = document.getElementById('flip-btn');
 
   // default user media options
   let constraints = { audio: false, video: true }
