@@ -1,50 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+video  {
+  width: 192px;
+  height: 192px;
+  background: rgba(0,0,0,0.2);
+  -webkit-transform: scaleX(-1); /* mirror effect while using front cam */
+  transform: scaleX(-1);         /* mirror effect while using front cam */
 }
 
-body {
-    height: 100vh;
-    background: #555555;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.camera {
-    width: 500px;
-    height: 400px;
-    position: relative;
-    border: 5px solid white;
-    border-radius: 5px;
-}
-
-.video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.camera-button {
-    width: 64px;
-    font-size: 2em;
-    font-weight: bold;
-    padding: 0.5rem;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%) translateY(-20px);
-    background-color: transparent;
-    border: 2px solid white;
-    color: white;
-    text-align: center;
-}
-
-.camera-button:hover {
-    background: white;
-    color: #222;
-    transition: all 200ms linear;
+#canvas  {
+  width: 192px;
+  height: 192px;
+  -webkit-transform: scaleX(-1); /* mirror effect while using front cam */
+  transform: scaleX(-1);         /* mirror effect while using front cam */
 }

@@ -1,19 +1,62 @@
-const video = document.querySelector(".video")
-const cameraButton = document.querySelector(".camera-button")
-const canvas = document.querySelector(".canvas")
+// camera stream video element
+  let on_stream_video = document.querySelector('#camera-stream');
+  // flip button element
+  let flipBtn = document.querySelector('#flip-btn');
 
-navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-    video.srcObject = stream;
-    video.play();
-})
+  // default user media options
+  let constraints = { audio: false, video: true }
+  let shouldFaceUser = true;
 
-cameraButton.addEventListener("click", () => {
-    canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-    let image_data_url = canvas.toDataURL("image/jpeg");
-    const downloadLink = document.createElement("a");
-    downloadLink.href = image_data_url;
-    downloadLink.download = "selfie.jpeg";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-})
+  // check whether we can use facingMode
+  let supports = navigator.mediaDevices.getSupportedConstraints();
+  if( supports['facingMode'] === true ) {
+    flipBtn.disabled = false;
+  }
+
+  let stream = null;
+
+  function capture() {
+    constraints.video = {
+        width: {
+        min: 192,
+        ideal: 192,
+        max: 192,
+      },
+      height: {
+        min: 192,
+        ideal: 192,
+        max: 192
+      },
+      facingMode: shouldFaceUser ? 'user' : 'environment'
+    }
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(mediaStream) {
+        stream  = mediaStream;
+        on_stream_video.srcObject = stream;
+        on_stream_video.play();
+      })
+      .catch(function(err) {
+        console.log(err)
+      });
+  }
+
+  flipBtn.addEventListener('click', function(){
+    if( stream == null ) return
+    // we need to flip, stop everything
+    stream.getTracks().forEach(t => {
+      t.stop();
+    });
+    // toggle / flip
+    shouldFaceUser = !shouldFaceUser;
+    capture();
+  })
+
+  capture();
+
+  document.getElementById("capture-camera").addEventListener("click", function() {
+    // Elements for taking the snapshot
+      const video = document.querySelector('video');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+  });
